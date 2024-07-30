@@ -687,3 +687,68 @@ button:hover {
   border: 1px solid #b0acac;
   padding: 8px;
 }
+
+/* Styles généraux du modal */
+.modal-content {
+  background-color: #f8f9fa; /* Couleur de fond légère */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre douce */
+}
+
+.modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+/* Styles pour l'en-tête du modal */
+.modal-header {
+  border-bottom: 1px solid #dee2e6; /* Bordure légère */
+  background-color: #f1f1f1; /* Fond gris clair pour l'en-tête */
+  text-align: center; /* Centrer le texte dans l'en-tête */
+}
+
+.modal-title {
+  color: #000; /* Couleur noire pour le texte */
+  font-weight: bold; /* Texte en gras */
+  margin: 0; /* Éliminer les marges */
+}
+
+/* Styles pour le corps du modal */
+.modal-body {
+  font-size: 1.1rem; /* Taille du texte légèrement plus grande */
+  text-align: center; /* Centrer le texte */
+}
+
+/* Styles pour le pied du modal */
+.modal-footer {
+  display: flex;
+  justify-content: center; /* Centrer les boutons */
+  gap: 0.5rem; /* Espacement entre les boutons */
+  border-top: 1px solid #dee2e6; /* Bordure légère */
+  background-color: #f1f1f1; /* Fond gris clair pour le pied */
+}
+
+.modal-footer .btn {
+  border: none; /* Supprimer les bordures */
+  font-size: 1rem; /* Taille de police des boutons */
+}
+
+.modal-footer .btn-primary {
+  background-color: #007bff; /* Couleur du bouton "Yes" */
+  color: #fff; /* Couleur du texte */
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #0056b3; /* Couleur de survol pour le bouton "Yes" */
+}
+
+.modal-footer .btn-secondary {
+  background-color: #dc3545; /* Couleur du bouton "No" */
+  color: #fff; /* Couleur du texte */
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #c82333; /* Couleur de survol pour le bouton "No" */
+}

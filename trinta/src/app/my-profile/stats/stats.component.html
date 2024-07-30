@@ -78,7 +78,7 @@
     </div>
 
     <div class="col-xxxl-2 col-sm-6 col-md-4">
-        <button>
+      <button data-toggle="modal" data-target="#usersClockedInModal">
             <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
                 <mat-card-content>
                     <div class="icon d-flex align-items-center justify-content-center ml-auto mr-auto">
@@ -298,30 +298,25 @@
         </div>
     </div>
 </div>
+<!-- open t Modal -->
 
-<!-- Open Tikcets Modal -->
-
-<div class="modal fade" id="openticketsModal" tabindex="-1" role="dialog" aria-labelledby="openticketsModal" aria-hidden="true">
+<div class="modal fade" id="openticketsModal" tabindex="-1" role="dialog" aria-labelledby="openticketsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="openticketsModal">Open Tickets</h5>
+        <h5 class="modal-title" id="openticketsModalLabel">Open Tickets</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <!-- Ajout de lignes vides pour séparation -->
               <div style="margin-bottom: 20px;"></div>
 
-              <!-- Barre de recherche -->
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
-                <button class="btn btn-outline-secondary btn-sm btn-search" style="font-size: 0.875rem; padding: 0.375rem 0.6rem; background-color: #dcd9d9; color: #333; border-color: #ccc;"type="button">Search</button>
+                <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" [(ngModel)]="searchTerm">
+                <button class="btn btn-outline-secondary btn-sm btn-search" style="font-size: 0.875rem; padding: 0.375rem 0.6rem; background-color: #dcd9d9; color: #333; border-color: #ccc;" type="button" (click)="searchTickets()">Search</button>
               </div>
-
-              <!-- Tableau des détails des tickets -->
               <mat-card class="trinta-card profile-intro-card mb-25 bg-white border-none d-block flex-grow-1">
                 <mat-card-header>
                   <mat-card-title>
@@ -340,96 +335,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Ticket 1</td>
-                        <td>Pizza</td>
-                        <td>Ali</td>
-                        <td>20</td>
-                        <td>20</td>
-                      </tr>
-                      <tr>
-                        <td>Ticket 2</td>
-                        <td>Food</td>
-                        <td>Sami</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Ticket 2</td>
-                        <td>Food</td>
-                        <td>Sami</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Ticket 2</td>
-                        <td>Food</td>
-                        <td>Sami</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Ticket 2</td>
-                        <td>Food</td>
-                        <td>Sami</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Ticket 2</td>
-                        <td>Food</td>
-                        <td>Sami</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Ticket 2</td>
-                        <td>Food</td>
-                        <td>Sami</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Ticket 2</td>
-                        <td>Food</td>
-                        <td>Sami</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Ticket 2</td>
-                        <td>Food</td>
-                        <td>Sami</td>
-                        <td>50</td>
-                        <td>50</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <p *ngIf="selectedUserId">
-                    <strong>User ID:</strong> {{ selectedUserId }}
-                  </p>
-                  <p *ngIf="selectedUsername">
-                    <strong>Username:</strong> {{ selectedUsername }}
-                  </p>
-                  <p *ngIf="selectedUsername">
-                    <strong>User Details :</strong>
-                  </p>
-                  <table *ngIf="selectedUserId" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">User Id</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Due</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{{ selectedUserId }}</td>
-                        <td>{{ selectedFirstName }}</td>
-                        <td>{{ selectedLastName }}</td>
-                        <td>{{ selectedDue }}</td>
+                      <tr *ngFor="let ticket of filteredTickets">
+                        <td>{{ ticket.token }}</td>
+                        <td>{{ ticket.orderType }}</td>
+                        <td>{{ ticket.server }}</td>
+                        <td>{{ ticket.total }}</td>
+                        <td>{{ ticket.due }}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -448,6 +359,9 @@
   </div>
 </div>
 
+
+
+<!-- Authorize Modal -->
 <!-- Authorize Modal -->
 <div class="modal fade" id="authorizeModal" tabindex="-1" role="dialog" aria-labelledby="authorizeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
@@ -461,36 +375,25 @@
           <div class="row">
             <div>
               <button type="button" class="btn btn-sm btn-dark me-2" id="captureWaitingButton" style="background-color: #fceabd; color: #333; margin-right: 10px;">Capture Waiting</button>
-              <button type="button" class="btn btn-sm btn-dark me-2" id="capturedButton" style="background-color: #fceabd; color: #333;">Captured</button>
-              <!-- Espacement entre les boutons et les sélecteurs -->
+              <button type="button" class="btn btn-sm btn-dark me-2" id="capturedButton" button data-toggle="modal" data-target="#capturedModal"style="background-color: #fceabd; color: #333;">Captured</button>
               <div style="margin-bottom: 10px;"></div>
-              <!-- Barre de recherche avec sélecteurs -->
               <div class="input-group mb-3">
-                <!-- Select Terminal -->
-                <select class="form-select" aria-label="Select Terminal" style="margin-left: 10px;">
-                  <option selected>Select Terminal</option>
-                  <option value="terminal1">Terminal 1</option>
-                  <option value="terminal2">Terminal 2</option>
-                  <option value="terminal3">Terminal 3</option>
+                <select class="form-select" aria-label="Select Terminal" style="margin-left: 10px;" [(ngModel)]="selectedTerminal">
+                  <option value="">Select Terminal</option>
+                  <option value="Terminal 1">Terminal 1</option>
+                  <option value="Terminal 2">Terminal 2</option>
+                  <option value="Terminal 3">Terminal 3</option>
                 </select>
-
-                <!-- Select User -->
-                <select class="form-select" aria-label="Select User" style="margin-left: 10px;">
-                  <option selected>Select User</option>
-                  <option value="user1">User 1</option>
-                  <option value="user2">User 2</option>
-                  <option value="user3">User 3</option>
+                <select class="form-select" aria-label="Select User" style="margin-left: 10px;" [(ngModel)]="selectedUser">
+                  <option value="">Select User</option>
+                  <option value="User 1">User 1</option>
+                  <option value="User 2">User 2</option>
+                  <option value="User 3">User 3</option>
                 </select>
-
-                <!-- Input pour la recherche -->
-                <input type="text" class="form-control" placeholder="Ticket ID" aria-label="Ticket ID" aria-describedby="basic-addon2" style="width: 150px; margin-left: 10px;">
-
-                <!-- Boutons Search et Clear -->
-                <button class="btn btn-outline-secondary btn-sm btn-search" type="button" style="margin-left: 10px; background-color: #90551b; color: #dcd9d9;">Search</button>
-                <button class="btn btn-outline-secondary btn-sm btn-clear" type="button" style="margin-left: 5px;background-color: #90551b; color: #dcd9d9;">Clear</button>
+                <input type="text" class="form-control" placeholder="Ticket ID" aria-label="Ticket ID" aria-describedby="basic-addon2" style="width: 150px; margin-left: 10px;" [(ngModel)]="searchTerm1">
+                <button class="btn btn-outline-secondary btn-sm btn-search" type="button" style="margin-left: 10px; background-color: #90551b; color: #dcd9d9;" (click)="searchTransactions()">Search</button>
+                <button class="btn btn-outline-secondary btn-sm btn-clear" type="button" style="margin-left: 5px;background-color: #90551b; color: #dcd9d9;" (click)="clearSearch()">Clear</button>
               </div>
-
-              <!-- Tableau des détails des transactions -->
               <mat-card class="trinta-card profile-intro-card mb-25 bg-white border-none d-block flex-grow-1">
                 <mat-card-header>
                   <mat-card-title>
@@ -515,32 +418,18 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <!-- Exemples de lignes de données -->
-                        <tr>
-                          <td>1</td>
-                          <td>12345</td>
-                          <td>Visa</td>
-                          <td>John Doe</td>
-                          <td>Visa</td>
-                          <td>**** **** 1234</td>
-                          <td>John Doe</td>
-                          <td>10</td>
-                          <td>100</td>
-                          <td>110</td>
+                        <tr *ngFor="let transaction of filteredTransactions">
+                          <td>{{ transaction.transactionId }}</td>
+                          <td>{{ transaction.ticketId }}</td>
+                          <td>{{ transaction.gateway }}</td>
+                          <td>{{ transaction.owner }}</td>
+                          <td>{{ transaction.cardType }}</td>
+                          <td>{{ transaction.cardNo }}</td>
+                          <td>{{ transaction.cardHolder }}</td>
+                          <td>{{ transaction.tips }}</td>
+                          <td>{{ transaction.amount }}</td>
+                          <td>{{ transaction.total }}</td>
                         </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>67890</td>
-                          <td>MasterCard</td>
-                          <td>Jane Smith</td>
-                          <td>MasterCard</td>
-                          <td>**** **** 5678</td>
-                          <td>Jane Smith</td>
-                          <td>15</td>
-                          <td>150</td>
-                          <td>165</td>
-                        </tr>
-                        <!-- Ajoutez d'autres lignes selon votre structure -->
                       </tbody>
                     </table>
                   </div>
@@ -552,10 +441,239 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-dark me-2" id="hideButton" style="background-color: #ae8827; color: #333;">Edit Tips</button>
-        <button type="button" class="btn btn-sm btn-dark me-2" id="captureAllButton" style="background-color: #fceabd; color: #333;">Capture </button>
+        <button type="button" class="btn btn-sm btn-dark me-2" id="captureAllButton" style="background-color: #fceabd; color: #333;">Capture</button>
         <button type="button" class="btn btn-sm btn-dark me-2" id="captureButton" style="background-color: #fceabd; color: #333;">Capture All</button>
         <button type="button" class="btn btn-sm btn-dark me-2" id="editTipsButton" style="background-color: #fceabd; color: #333;">Hide</button>
-        <button type="button" class="btn btn-sm btn-success" id="closeButton" style="background-color: rgb(160, 0, 0); color: #ffffff;">Close</button>
+        <button type="button" class="btn btn-sm btn-success" id="closeButton" style="background-color: rgb(160, 0, 0); color: #ffffff;" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Captured Modal -->
+<div class="modal fade" id="capturedModal" tabindex="-1" role="dialog" aria-labelledby="capturedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="capturedModalLabel">Captured Transactions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body modal-scrollable">
+        <div class="container">
+          <div class="row">
+            <div>
+              <!-- Buttons at the top of the modal -->
+              <button type="button" class="btn btn-sm btn-dark" id="captureWaitingButtonInCaptured" style="background-color: #fceabd; color: #333;">Capture Waiting</button>
+                            <button type="button" class="btn btn-sm btn-dark me-2" id="capturedButton" style="background-color: #fceabd; color: #333;">Captured</button>
+              <div style="margin-bottom: 10px;"></div>
+              <!-- Search bar with selectors -->
+              <div class="input-group mb-3">
+                <select class="form-select" aria-label="Select Terminal" style="margin-left: 10px;" [(ngModel)]="selectedTerminal">
+                  <option value="">Select Terminal</option>
+                  <option value="Terminal 1">Terminal 1</option>
+                  <option value="Terminal 2">Terminal 2</option>
+                  <option value="Terminal 3">Terminal 3</option>
+                </select>
+                <select class="form-select" aria-label="Select User" style="margin-left: 10px;" [(ngModel)]="selectedUser">
+                  <option value="">Select User</option>
+                  <option value="User 1">User 1</option>
+                  <option value="User 2">User 2</option>
+                  <option value="User 3">User 3</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Ticket ID" aria-label="Ticket ID" aria-describedby="basic-addon2" style="width: 150px; margin-left: 10px;" [(ngModel)]="searchTerm1">
+                <button class="btn btn-outline-secondary btn-sm btn-search" type="button" style="margin-left: 10px; background-color: #90551b; color: #dcd9d9;" (click)="searchTransactions()">Search</button>
+                <button class="btn btn-outline-secondary btn-sm btn-clear" type="button" style="margin-left: 5px; background-color: #90551b; color: #dcd9d9;" (click)="clearSearch()">Clear</button>
+              </div>
+              <!-- Transaction details table -->
+              <mat-card class="trinta-card profile-intro-card mb-25 bg-white border-none d-block flex-grow-1">
+                <mat-card-header>
+                  <mat-card-title>
+                    <h5 class="mt-0 mb-0">Transaction Details</h5>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">Transaction ID</th>
+                          <th scope="col">Ticket ID</th>
+                          <th scope="col">Gateway</th>
+                          <th scope="col">Owner</th>
+                          <th scope="col">Card Type</th>
+                          <th scope="col">Card No</th>
+                          <th scope="col">Card Holder</th>
+                          <th scope="col">Tips</th>
+                          <th scope="col">Amount</th>
+                          <th scope="col">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let transaction of filteredTransactions">
+                          <td>{{ transaction.transactionId }}</td>
+                          <td>{{ transaction.ticketId }}</td>
+                          <td>{{ transaction.gateway }}</td>
+                          <td>{{ transaction.owner }}</td>
+                          <td>{{ transaction.cardType }}</td>
+                          <td>{{ transaction.cardNo }}</td>
+                          <td>{{ transaction.cardHolder }}</td>
+                          <td>{{ transaction.tips }}</td>
+                          <td>{{ transaction.amount }}</td>
+                          <td>{{ transaction.total }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-dark me-2" id="hideButton" style="background-color: #ae8827; color: #333;">Hide</button>
+        <!-- Remove other buttons if not needed -->
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-dialog {
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  .close-button {
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var authorizeModal = document.getElementById('authorizeModal');
+    var capturedModal = document.getElementById('capturedModal');
+    var captureWaitingButton = document.getElementById('captureWaitingButtonInCaptured');
+    var closeButtonAuthorize = document.getElementById('closeButton');
+    var closeButtonCaptured = document.querySelector('#capturedModal .close-button');
+    var captureWaitingButtonAuthorize = document.getElementById('captureWaitingButton');
+    var hideButtonInCaptured = document.getElementById('hideButtonInCaptured');
+
+    function openModal(modal) {
+      modal.style.display = 'flex';
+    }
+
+    function closeModal(modal) {
+      modal.style.display = 'none';
+    }
+
+    // Open Authorize Modal
+    openModal(authorizeModal);
+
+    // Close Authorize Modal
+    closeButtonAuthorize.addEventListener('click', function () {
+      closeModal(authorizeModal);
+    });
+
+    // Close Captured Modal
+    closeButtonCaptured.addEventListener('click', function () {
+      closeModal(capturedModal);
+    });
+
+    // Show Captured Modal and hide Authorize Modal
+    captureWaitingButtonAuthorize.addEventListener('click', function () {
+      closeModal(authorizeModal);
+      openModal(capturedModal);
+    });
+
+    // Hide Captured Modal
+    hideButtonInCaptured.addEventListener('click', function () {
+      closeModal(capturedModal);
+    });
+
+    // Show Authorize Modal from Captured Modal
+    captureWaitingButton.addEventListener('click', function () {
+      closeModal(capturedModal);
+      openModal(authorizeModal);
+    });
+  });
+</script>
+
+<!-- Users Clocked In Modal -->
+<div class="modal fade" id="usersClockedInModal" tabindex="-1" role="dialog" aria-labelledby="usersClockedInModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="usersClockedInModalLabel">Following Users Are Clocked In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body modal-scrollable">
+        <div class="container">
+          <div class="row">
+            <div>
+              <!-- User Status Table -->
+              <mat-card class="trinta-card profile-intro-card mb-25 bg-white border-none d-block flex-grow-1">
+                <mat-card-header>
+                  <mat-card-title>
+                    <h5 class="mt-0 mb-0">User Status</h5>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">User</th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>User 1</td>
+                          <td><button type="button"  data-toggle="modal" data-target="#confirmationModal" class="btn btn-danger">Force Clock Out</button></td>
+                        </tr>
+                        <tr>
+                          <td>User 2</td>
+                          <td><button type="button" class="btn btn-danger">Force Clock Out</button></td>
+                        </tr>
+                        <!-- Ajoutez d'autres lignes ici si nécessaire -->
+                      </tbody>
+                    </table>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-dark" style="background-color: rgb(13, 132, 0); color: #333;" data-bs-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Are you sure you want to clock out?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-success" id="confirmClockOutButton">Yes</button>
+        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">No</button>
       </div>
     </div>
   </div>
