@@ -673,8 +673,24 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-success" id="confirmClockOutButton">Yes</button>
-        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" >No</button>
       </div>
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const cancelClockOutButton = document.getElementById('cancelClockOutButton');
+
+    cancelClockOutButton.addEventListener('click', function () {
+      // Fermer le modal de confirmation
+      const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+      confirmationModal.hide();
+
+      // Ouvrir le modal des utilisateurs clockés
+      const usersClockedInModal = new bootstrap.Modal(document.getElementById('usersclockedinModal'));
+      usersClockedInModal.show();
+    });
+  });
+</script>
+
