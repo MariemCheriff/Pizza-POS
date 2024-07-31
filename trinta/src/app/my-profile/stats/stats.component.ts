@@ -12,6 +12,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-stats',
   standalone: true,
@@ -31,6 +32,9 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./stats.component.scss']
 })
 export class StatsComponent implements AfterViewInit {
+  @ViewChild('confirmationModal', { static: true }) confirmationModal: any;
+  @ViewChild('usersClockedInModal', { static: true }) usersClockedInModal: any;
+
   searchTerm: string = '';
   searchTerm1: string = '';
   selectedUser: string = '';

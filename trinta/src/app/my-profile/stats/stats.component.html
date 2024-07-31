@@ -672,25 +672,44 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-success" id="confirmClockOutButton">Yes</button>
-        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" >No</button>
+        <button class="btn btn-sm btn-success" id="confirmClockOutButton">Yes</button>
+        <button class="btn btn-sm btn-danger" id="cancelClockOutButton" (click)="confirmationModal.hide();">No</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Users Clocked In Modal -->
+<div class="modal fade" id="usersClockedInModal" tabindex="-1" role="dialog" aria-labelledby="usersClockedInModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="usersClockedInModalLabel">Users Clocked In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Contenu du modal -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const cancelClockOutButton = document.getElementById('cancelClockOutButton');
+  const cancelClockOutButton = document.getElementById('cancelClockOutButton');
 
-    cancelClockOutButton.addEventListener('click', function () {
-      // Fermer le modal de confirmation
-      const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-      confirmationModal.hide();
+  cancelClockOutButton.addEventListener('click', function () {
+    // Fermer le modal de confirmation
+    const confirmationModalElement = document.getElementById('confirmationModal');
+    const confirmationModal = bootstrap.Modal.getInstance(confirmationModalElement);
+    confirmationModal.hide();
 
-      // Ouvrir le modal des utilisateurs clockés
-      const usersClockedInModal = new bootstrap.Modal(document.getElementById('usersclockedinModal'));
-      usersClockedInModal.show();
-    });
+
   });
+});
+
 </script>
 
