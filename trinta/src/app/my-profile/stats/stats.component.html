@@ -21,7 +21,7 @@
                     <div class="icon d-flex align-items-center justify-content-center ml-auto mr-auto">
                         <i-feather name="pie-chart"></i-feather>
                     </div>
-                    <span class="d-block text-gray">
+                    <span class="d-block text-gray" data-toggle="modal" data-target="#storestatusModal">
                         Store Status
                     </span>
                 </mat-card-content>
@@ -559,55 +559,6 @@
   }
 </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var authorizeModal = document.getElementById('authorizeModal');
-    var capturedModal = document.getElementById('capturedModal');
-    var captureWaitingButton = document.getElementById('captureWaitingButtonInCaptured');
-    var closeButtonAuthorize = document.getElementById('closeButton');
-    var closeButtonCaptured = document.querySelector('#capturedModal .close-button');
-    var captureWaitingButtonAuthorize = document.getElementById('captureWaitingButton');
-    var hideButtonInCaptured = document.getElementById('hideButtonInCaptured');
-
-    function openModal(modal) {
-      modal.style.display = 'flex';
-    }
-
-    function closeModal(modal) {
-      modal.style.display = 'none';
-    }
-
-    // Open Authorize Modal
-    openModal(authorizeModal);
-
-    // Close Authorize Modal
-    closeButtonAuthorize.addEventListener('click', function () {
-      closeModal(authorizeModal);
-    });
-
-    // Close Captured Modal
-    closeButtonCaptured.addEventListener('click', function () {
-      closeModal(capturedModal);
-    });
-
-    // Show Captured Modal and hide Authorize Modal
-    captureWaitingButtonAuthorize.addEventListener('click', function () {
-      closeModal(authorizeModal);
-      openModal(capturedModal);
-    });
-
-    // Hide Captured Modal
-    hideButtonInCaptured.addEventListener('click', function () {
-      closeModal(capturedModal);
-    });
-
-    // Show Authorize Modal from Captured Modal
-    captureWaitingButton.addEventListener('click', function () {
-      closeModal(capturedModal);
-      openModal(authorizeModal);
-    });
-  });
-</script>
 
 <!-- Users Clocked In Modal -->
 <div class="modal fade" id="usersClockedInModal" tabindex="-1" role="dialog" aria-labelledby="usersClockedInModalLabel" aria-hidden="true">
@@ -657,7 +608,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-dark" style="background-color: rgb(13, 132, 0); color: #333;" data-bs-dismiss="modal">Done</button>
+        <button type="button" class="btn btn-sm btn-dark" style="background-color: rgb(13, 132, 0); color: #333;" (click)="closeModal('usersClockedInModal')">Done</button>
       </div>
     </div>
   </div>
@@ -669,47 +620,89 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="confirmationModalLabel">Are you sure you want to clock out?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-sm btn-success" id="confirmClockOutButton">Yes</button>
-        <button class="btn btn-sm btn-danger" id="cancelClockOutButton" (click)="confirmationModal.hide();">No</button>
+        <button class="btn btn-sm btn-success" (click)="clockOutUser()" data-toggle="modal" data-target="#usersClockedInModal2">Yes</button>
+        <button class="btn btn-sm btn-danger" (click)="closeConfirmationModal()">No</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Users Clocked In Modal -->
-<div class="modal fade" id="usersClockedInModal" tabindex="-1" role="dialog" aria-labelledby="usersClockedInModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<!-- Users Clocked In Modal 2 -->
+<div class="modal fade" id="usersClockedInModal2" tabindex="-1" role="dialog" aria-labelledby="usersClockedInModal2Label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="usersClockedInModalLabel">Users Clocked In</h5>
+        <h5 class="modal-title" id="usersClockedInModal2Label">Clock Out Status</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="showMessage" class="alert alert-info" role="alert">
+          {{ clockOutMessage }}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-print" (click)="printMessage()">Print</button>
+        <button class="btn btn-sm btn-ok" (click)="redirectToMyProfile()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Store Status Modal -->
+<div class="modal fade" id="storestatusModal" tabindex="-1" role="dialog" aria-labelledby="storestatusModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="storestatusModalLabel">Store Status</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
-        <!-- Contenu du modal -->
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Drawer Stuff</th>
+                <th scope="col">Lock</th>
+                <th scope="col">Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cash</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                </td>
+                <td>Type 1</td>
+                <td>Active</td>
+                <td><button type="button" class="btn btn-assign">Assign</button></td>
+              </tr>
+              <tr>
+                <td>Coins</td>
+                <td>
+                  <button type="button" class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                </td>
+                <td>Type 2</td>
+                <td>Inactive</td>
+                <td><button type="button" class="btn btn-assign">Assign</button>
+                </td>
+              </tr>
+              <!-- Ajoutez d'autres lignes ici si nécessaire -->
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-report" (click)="generateReport()">Report</button>
+        <button type="button" class="btn btn-history" (click)="viewHistory()">History</button>
+        <button type="button" class="btn btn-close-store" >Close Store</button>
+        <button type="button" class="btn btn-close" data-bs-dismiss="modal" (click)="closeModal('storestatusModal')">Close</button>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-  const cancelClockOutButton = document.getElementById('cancelClockOutButton');
-
-  cancelClockOutButton.addEventListener('click', function () {
-    // Fermer le modal de confirmation
-    const confirmationModalElement = document.getElementById('confirmationModal');
-    const confirmationModal = bootstrap.Modal.getInstance(confirmationModalElement);
-    confirmationModal.hide();
-
-
-  });
-});
-
-</script>
-

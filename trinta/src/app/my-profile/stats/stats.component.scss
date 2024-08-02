@@ -752,3 +752,120 @@ button:hover {
 .modal-footer .btn-secondary:hover {
   background-color: #c82333; /* Couleur de survol pour le bouton "No" */
 }
+/* Modal Buttons */
+.modal-footer .btn {
+  border-radius: 5px;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+}
+
+/* Button Colors */
+.btn-print {
+  background-color: #f5c54c;
+  border: none;
+}
+
+.btn-ok {
+  background-color: #4f1410;
+  border: none;
+}
+
+.btn-confirm {
+  background-color: #d18501;
+  border: none;
+}
+
+.btn-cancel {
+  background-color: #8d1b06;
+  border: none;
+}
+
+/* Optional: Add hover effects */
+.btn-print:hover {
+  background-color: #d18501;
+}
+
+.btn-ok:hover {
+  background-color: #90551b;
+}
+
+.btn-confirm:hover {
+  background-color: #8d1b06;
+}
+
+.btn-cancel:hover {
+  background-color: #4f1410;
+}
+
+/* Alert Background */
+.alert-info {
+  background-color: #fceabd;
+  border-color: #f5c54c;
+}
+/* Store Status Modal Buttons */
+#storestatusModal .btn-assign {
+  background-color: #d18501; /* Couleur de fond pour les boutons "assign" */
+  color: #fceabd; /* Couleur du texte pour les boutons "assign" */
+  border: none;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+#storestatusModal .btn-assign:hover {
+  background-color: #8d1b06; /* Couleur de fond au survol pour les boutons "assign" */
+}
+
+/* Button Styles */
+#storestatusModal .btn-report {
+  background-color: #d18501; /* Couleur de fond pour le bouton "report" */
+  color: #fceabd; /* Couleur du texte pour le bouton "report" */
+}
+
+#storestatusModal .btn-history {
+  background-color: #8d1b06; /* Couleur de fond pour le bouton "history" */
+  color: #fceabd; /* Couleur du texte pour le bouton "history" */
+}
+
+#storestatusModal .btn-close-store {
+  background-color: #4f1410; /* Couleur de fond pour le bouton "close store" */
+  color: #fceabd; /* Couleur du texte pour le bouton "close store" */
+}
+
+#storestatusModal .btn-close {
+  background-color: #f5c54c; /* Couleur de fond pour le bouton "close" */
+  color: #4f1410; /* Couleur du texte pour le bouton "close" */
+}
+
+/* Optional: Add hover effects for modal buttons */
+#storestatusModal .btn-report:hover {
+  background-color: #90551b; /* Couleur de fond au survol pour le bouton "report" */
+}
+
+#storestatusModal .btn-history:hover {
+  background-color: #4f1410; /* Couleur de fond au survol pour le bouton "history" */
+}
+
+#storestatusModal .btn-close-store:hover {
+  background-color: #8d1b06; /* Couleur de fond au survol pour le bouton "close store" */
+}
+
+#storestatusModal .btn-close:hover {
+  background-color: #d18501; /* Couleur de fond au survol pour le bouton "close" */
+}
+/* Button Colors */
+.btn-assign {
+  background-color: #8d1b06; /* Couleur de fond */
+  color: #fceabd; /* Couleur du texte */
+  border: none;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Hover effect */
+.btn-assign:hover {
+  background-color: #90551b; /* Couleur de fond au survol */
+}
+
