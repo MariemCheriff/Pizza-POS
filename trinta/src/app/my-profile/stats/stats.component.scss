@@ -1026,3 +1026,48 @@ button:hover {
   color: #ffffff;
 }
 
+/* Button Styles */
+#payoutModal .btn {
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 0.5rem 0.25rem;
+  margin: 3px; /* Espace entre les boutons */
+}
+
+/* Styles pour les boutons du modal */
+.btn-primary {
+  background-color: #f5c54c;
+  color: #4f1410;
+}
+
+.btn-primary:hover {
+  background-color: #d18501;
+}
+
+.btn-secondary {
+  background-color: #e0e0e0;
+  color: #4f1410;
+}
+
+.btn-secondary:hover {
+  background-color: #c0c0c0;
+}
+
+.btn-danger {
+  background-color: #8d1b06;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #4f1410;
+}
+
+.btn-success {
+  background-color: #90551b;
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background-color: #8d1b06;
+}
+
