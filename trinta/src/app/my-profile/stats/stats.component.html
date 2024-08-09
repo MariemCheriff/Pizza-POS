@@ -680,7 +680,7 @@
                 </td>
                 <td>Type 1</td>
                 <td>Active</td>
-                <td><button type="button" class="btn btn-assign">Assign</button></td>
+                <td><button type="button" class="btn btn-assign" data-toggle="modal" data-target="#assignModal">Assign</button></td>
               </tr>
               <tr>
                 <td>Coins</td>
@@ -689,7 +689,7 @@
                 </td>
                 <td>Type 2</td>
                 <td>Inactive</td>
-                <td><button type="button" class="btn btn-assign">Assign</button>
+                <td><button type="button" class="btn btn-assign" data-toggle="modal" data-target="#assignModal">Assign</button>
                 </td>
               </tr>
               <!-- Ajoutez d'autres lignes ici si nécessaire -->
@@ -706,3 +706,125 @@
     </div>
   </div>
 </div>
+
+<!-- Assign button Modal -->
+<div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="assignModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="assignModalLabel">Activity Summary</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body d-flex">
+        <!-- Left Button Group -->
+        <div class="btn-group-vertical me-3">
+          <button type="button" class="btn btn-drawer-bleed" data-toggle="modal" data-target="#drawerBleedModal">Drawer Bleed</button>
+          <button type="button" class="btn btn-no-sale">No Sale</button>
+          <button type="button" class="btn btn-payout">Payout</button>
+          <button type="button" class="btn btn-cash-in" data-toggle="modal" data-target="#cashinModal">Cash In</button>
+        </div>
+
+        <!-- PDF Viewer in the center -->
+        <div class="flex-fill pdf-viewer">
+          <!-- Embed PDF here -->
+          <iframe src="path_to_pdf" style="width:100%; height:500px;" frameborder="0"></iframe>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <!-- Bottom Button Group -->
+        <div class="btn-group" style="text-align: center;">
+          <button type="button" class="btn btn-print">Print</button>
+          <button type="button" class="btn btn-details">Details</button>
+          <button type="button" class="btn btn-transfer-user">Transfer User</button>
+          <button type="button" class="btn btn-close-drawer">Close Drawer</button>
+          <button type="button" class="btn btn-done">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Drawer Bleed Amount Modal -->
+<div class="modal fade" id="drawerBleedModal" tabindex="-1" role="dialog" aria-labelledby="drawerBleedModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="drawerBleedModalLabel">Enter Drawer Bleed Amount</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <!-- Display Screen -->
+        <div id="display" class="mb-3 p-3 border rounded text-end" style="font-size: 2rem; background-color: hsl(44, 100%, 85%);">{{ displayValue }}</div>
+
+        <!-- Numeric Keypad -->
+        <div class="d-grid gap-2">
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('7')">7</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('8')">8</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('9')">9</button></div>
+            <div class="col"><button type="button" class="btn btn-primary" (click)="applyOperation('+')" style="background-color: #ffffff; color: #90551b;">+</button></div>
+          </div>
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('4')">4</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('5')">5</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('6')">6</button></div>
+            <div class="col"><button type="button" class="btn btn-primary" (click)="applyOperation('-')" style="background-color: hsl(0, 0%, 100%); color: #90551b;">-</button></div>
+          </div>
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('1')">1</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('2')">2</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('3')">3</button></div>
+            <div class="col"><button type="button" class="btn btn-danger" (click)="clearDisplay()">C</button></div>
+          </div>
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('0')">0</button></div>
+            <div class="col"><button type="button" class="btn btn-success">Done</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CashIn Modal -->
+<div class="modal fade" id="cashinModal" tabindex="-1" role="dialog" aria-labelledby="cashinModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cashinLabel">Enter Cash In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <!-- Display Screen -->
+        <div id="display" class="mb-3 p-3 border rounded text-end" style="font-size: 2rem; background-color: hsl(44, 100%, 85%);">{{ displayValue }}</div>
+
+        <!-- Numeric Keypad -->
+        <div class="d-grid gap-2">
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('7')">7</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('8')">8</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('9')">9</button></div>
+            <div class="col"><button type="button" class="btn btn-primary" (click)="applyOperation('+')" style="background-color: #ffffff; color: #90551b;">+</button></div>
+          </div>
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('4')">4</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('5')">5</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('6')">6</button></div>
+            <div class="col"><button type="button" class="btn btn-primary" (click)="applyOperation('-')" style="background-color: hsl(0, 0%, 100%); color: #90551b;">-</button></div>
+          </div>
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('1')">1</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('2')">2</button></div>
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('3')">3</button></div>
+            <div class="col"><button type="button" class="btn btn-danger" (click)="clearDisplay()">C</button></div>
+          </div>
+          <div class="row">
+            <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('0')">0</button></div>
+            <div class="col"><button type="button" class="btn btn-success">Done</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

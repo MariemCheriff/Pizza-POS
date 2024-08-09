@@ -71,6 +71,52 @@ export class StatsComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['tickets', 'orderType', 'server', 'due', 'total', 'priority', 'action'];
   dataSource = new MatTableDataSource(this.tickets);
+  displayValue: string = '0';
+  currentOperation: string = '';
+  previousValue: string = '';
+
+  // Fonction pour ajouter un nombre à l'afficheur
+  appendNumber(number: string) {
+    if (this.displayValue === '0') {
+      this.displayValue = number;
+    } else {
+      this.displayValue += number;
+    }
+  }
+
+  // Fonction pour appliquer une opération (+ ou -)
+  applyOperation(operation: string) {
+    const current = parseFloat(this.displayValue);
+    this.currentOperation = operation;
+    if (this.currentOperation === '+') {
+      this.displayValue = (current + 1).toString();
+    } else if (this.currentOperation === '-') {
+      this.displayValue = (current - 1).toString();
+    }
+
+    this.currentOperation = '';
+
+
+  }
+
+  // Fonction pour calculer le résultat de l'opération actuelle
+  executeOperation() {
+    const current = parseFloat(this.displayValue);
+
+    if (this.currentOperation === '+') {
+      this.displayValue = (current + 1).toString();
+    } else if (this.currentOperation === '-') {
+      this.displayValue = (current - 1).toString();
+    }
+
+    this.currentOperation = ''; // Réinitialiser l'opération après exécution
+  }
+
+  // Fonction pour réinitialiser l'afficheur
+  clearDisplay() {
+    this.displayValue = '0';
+    this.currentOperation = '';
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -115,6 +161,7 @@ export class StatsComponent implements AfterViewInit {
       this.renderer.setStyle(document.body, 'padding-right', '15px');
     }
   }
+
 
   closeModal(modalId: string) {
     const modalElement = document.getElementById(modalId);

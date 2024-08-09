@@ -800,6 +800,7 @@ button:hover {
 
 /* Alert Background */
 .alert-info {
+  color: #000;
   background-color: #fceabd;
   border-color: #f5c54c;
 }
@@ -867,5 +868,161 @@ button:hover {
 /* Hover effect */
 .btn-assign:hover {
   background-color: #90551b; /* Couleur de fond au survol */
+}
+
+/* Modal Styling */
+.modal-content {
+  padding: 20px;
+}
+
+/* Button Colors */
+.btn-drawer-bleed {
+  background-color: #f5c54c;
+  border: none;
+  color: #fff;
+}
+
+.btn-no-sale {
+  background-color: #d18501;
+  border: none;
+  color: #fff;
+}
+
+.btn-payout {
+  background-color: #8d1b06;
+  border: none;
+  color: #fff;
+}
+
+.btn-cash-in {
+  background-color: #4f1410;
+  border: none;
+  color: #fff;
+}
+
+.btn-print {
+  background-color: #fceabd;
+  color: #000;
+  border: none;
+  color: #4f1410;
+}
+
+.btn-details {
+  background-color: #f5c54c;
+  border: none;
+  color: #4f1410;
+}
+
+.btn-transfer-user {
+  background-color: #d18501;
+  border: none;
+  color: #fff;
+}
+
+.btn-close-drawer {
+  background-color: #8d1b06;
+  border: none;
+  color: #fff;
+}
+
+.btn-done {
+  background-color: #4f1410;
+  border: none;
+  color: #fff;
+}
+
+/* PDF Viewer Styling */
+.pdf-viewer {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Background Color for Calculator Modal */
+#drawerBleedModal .modal-body {
+  background-color: #ffffff; /* Couleur blanche pour le fond */
+}
+
+/* Style for Display Screen */
+#drawerBleedModal #display {
+  font-size: 2rem;
+  background-color: #fceabd; /* Couleur pour l'écran */
+  color: #4f1410;
+  border: 2px solid #d18501;
+}
+
+/* Button Styles */
+#drawerBleedModal .btn {
+  border-radius: 5px;
+  font-size: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  margin: 5px; /* Espace entre les boutons */
+}
+
+/* Specific Button Colors */
+#drawerBleedModal .btn-secondary {
+  background-color: #f5c54c;
+  color: #4f1410;
+}
+
+#drawerBleedModal .btn-primary {
+  background-color: #f5c54c;
+  color: #f5c54c;
+}
+
+#drawerBleedModal .btn-danger {
+  background-color: #8d1b06;
+  color: #ffffff;
+}
+
+#drawerBleedModal .btn-success {
+  background-color: #4f1410;
+  color: #ffffff;
+}
+
+/* Background Color for Calculator Modal */
+#cashinModal .modal-body {
+  background-color: #ffffff; /* Couleur blanche pour le fond */
+}
+
+/* Style for Display Screen */
+#cashinModal #display {
+  font-size: 2rem;
+  background-color: #fceabd; /* Couleur pour l'écran */
+  color: #4f1410;
+  border: 2px solid #d18501;
+}
+
+/* Button Styles */
+#cashinModal .btn {
+  border-radius: 5px;
+  font-size: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  margin: 5px; /* Espace entre les boutons */
+}
+
+/* Specific Button Colors */
+#cashinModal .btn-secondary {
+  background-color: #f5c54c;
+  color: #4f1410;
+}
+
+#cashinModal .btn-primary {
+  background-color: #f5c54c;
+  color: #f5c54c;
+}
+
+#cashinModal .btn-danger {
+  background-color: #8d1b06;
+  color: #ffffff;
+}
+
+#cashinModal .btn-success {
+  background-color: #4f1410;
+  color: #ffffff;
 }
 
