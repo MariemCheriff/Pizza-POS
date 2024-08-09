@@ -737,7 +737,7 @@
           <button type="button" class="btn btn-details">Details</button>
           <button type="button" class="btn btn-transfer-user">Transfer User</button>
           <button type="button" class="btn btn-close-drawer">Close Drawer</button>
-          <button type="button" class="btn btn-done">Done</button>
+          <button type="button" class="btn btn-done" (click)="closeModal('assignModal')">Done</button>
         </div>
       </div>
     </div>
@@ -778,7 +778,7 @@
           </div>
           <div class="row">
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('0')">0</button></div>
-            <div class="col"><button type="button" class="btn btn-success">Done</button></div>
+            <div class="col"><button type="button" class="btn btn-success" (click)="closeModal('drawerBleedModal')">Done</button></div>
           </div>
         </div>
       </div>
@@ -790,13 +790,12 @@
 <div class="modal fade" id="cashinModal" tabindex="-1" role="dialog" aria-labelledby="cashinModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="cashinLabel">Enter Cash In</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      <div class="modal-header" style="background-color: #f5c54c;">
+        <h5 class="modal-title" id="cashinModalLabel">Enter Cash In</h5>
       </div>
       <div class="modal-body text-center">
         <!-- Display Screen -->
-        <div id="display" class="mb-3 p-3 border rounded text-end" style="font-size: 2rem; background-color: hsl(44, 100%, 85%);">{{ displayValue }}</div>
+        <div id="display" class="mb-3 p-3 border rounded text-end" style="font-size: 2rem; background-color: #fceabd;">{{ displayValue }}</div>
 
         <!-- Numeric Keypad -->
         <div class="d-grid gap-2">
@@ -804,13 +803,13 @@
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('7')">7</button></div>
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('8')">8</button></div>
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('9')">9</button></div>
-            <div class="col"><button type="button" class="btn btn-primary" (click)="applyOperation('+')" style="background-color: #ffffff; color: #90551b;">+</button></div>
+            <div class="col"><button type="button" class="btn btn-primary" (click)="applyOperation('+')" style="background-color: #f5c54c; color: #4f1410;">+</button></div>
           </div>
           <div class="row">
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('4')">4</button></div>
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('5')">5</button></div>
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('6')">6</button></div>
-            <div class="col"><button type="button" class="btn btn-primary" (click)="applyOperation('-')" style="background-color: hsl(0, 0%, 100%); color: #90551b;">-</button></div>
+            <div class="col"><button type="button" class="btn btn-primary" (click)="applyOperation('-')" style="background-color: #d18501; color: #4f1410;">-</button></div>
           </div>
           <div class="row">
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('1')">1</button></div>
@@ -820,7 +819,7 @@
           </div>
           <div class="row">
             <div class="col"><button type="button" class="btn btn-secondary" (click)="appendNumber('0')">0</button></div>
-            <div class="col"><button type="button" class="btn btn-success">Done</button></div>
+            <div class="col"><button type="button" class="btn btn-success" (click)="executeOperation()">Done</button></div>
           </div>
         </div>
       </div>
