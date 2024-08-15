@@ -145,6 +145,7 @@ export class StatsComponent implements AfterViewInit {
     this.openModal('usersClockedInModal2');
   }
 
+
   confirmClockOut() {
     // Action à effectuer lors de la confirmation de la déconnexion
     this.closeModal('usersClockedInModal2');
@@ -160,6 +161,60 @@ export class StatsComponent implements AfterViewInit {
       this.renderer.setStyle(document.body, 'overflow', 'hidden');
       this.renderer.setStyle(document.body, 'padding-right', '15px');
     }
+  }
+
+  selectUser(user: any) {
+    this.selectedUserId = user.id;
+    this.selectedUsername = user.username;
+    alert(`Transfer to ${user.username} done`);
+    this.closeModal('transferUserModal');
+  }
+  confirmCloseDrawer() {
+    // Fermer le modal de confirmation
+    this.closeModal('confirmCloseDrawerModal');
+    this.closeModal('assignModal');
+
+
+    // Effectuer l'action de fermeture du tiroir ici
+    // Par exemple, afficher un message, mettre à jour l'état, etc.
+    alert('Drawer has been closed successfully.');
+
+    // Optionnel : Fermer le modal "assignModal" après la fermeture du tiroir
+    this.closeModal('assignModal');
+  }
+
+  settleAll() {
+    // Logique pour régler toutes les entrées
+    console.log('All entries settled');
+  }
+
+  continueClosing() {
+    // Logique pour continuer la fermeture du magasin
+    console.log('Continuing closing store');
+  }
+
+  cancelClosing() {
+    // Logique pour annuler la fermeture du magasin
+    console.log('Closing store canceled');
+    this.closeModal('storeClosingModal');
+  }
+  settle(token: string) {
+    // Logique pour régler un ticket spécifique
+    console.log(`Ticket ${token} settled`);
+  }
+
+  close(token: string) {
+    // Logique pour fermer un ticket spécifique
+    console.log(`Ticket ${token} closed`);
+  }
+
+
+
+  // Fonction pour gérer la sélection et la confirmation dans le modal "Transfer User"
+  confirmTransferUser() {
+    console.log('User sélectionné:', this.selectedUsername);
+    // Ajoutez ici toute autre logique nécessaire
+    this.closeModal('transferUserModal');
   }
 
 
@@ -289,6 +344,7 @@ export class StatsComponent implements AfterViewInit {
   }
 
   redirectToMyProfile() {
+
     this.closeAllModals(); // Fermer tous les modals ouverts
     this.router.navigate(['./my-profile']); // Rediriger vers ./my-profile
   }
@@ -326,6 +382,7 @@ export interface PeriodicElement {
   status: any;
   action: any;
 }
+
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {

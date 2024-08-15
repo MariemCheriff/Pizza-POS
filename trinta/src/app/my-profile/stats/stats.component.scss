@@ -1064,10 +1064,41 @@ button:hover {
 
 .btn-success {
   background-color: #90551b;
-  color: #ffffff;
+  color: #000000;
 }
 
 .btn-success:hover {
   background-color: #8d1b06;
 }
 
+/* Style pour les lignes sélectionnées */
+.table-hover tbody tr.selected {
+  background-color: #f5c54c; /* Couleur de sélection */
+  color: #000000;
+}
+
+/* Optionnel: Cachez les boutons radio pour un style plus propre */
+input[type="radio"] {
+  display: none;
+}
+
+
+
+/* Styles pour les boutons dans le modal de confirmation */
+#confirmCloseDrawerModal .btn-primary {
+  background-color: #d18501; /* Couleur dorée pour le bouton "Yes" */
+  color: #fceabd; /* Couleur beige pour le texte */
+  border: none;
+}
+
+#confirmCloseDrawerModal .btn-secondary {
+  background-color: #8d1b06; /* Couleur rouge foncé pour le bouton "No" */
+  color: #fceabd; /* Couleur beige pour le texte */
+  border: none;
+}
+
+/* Ajouter une couleur de survol */
+#confirmCloseDrawerModal .btn-primary:hover,
+#confirmCloseDrawerModal .btn-secondary:hover {
+  opacity: 0.8;
+}

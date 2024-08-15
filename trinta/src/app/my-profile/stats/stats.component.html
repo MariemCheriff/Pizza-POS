@@ -700,12 +700,60 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-report" (click)="generateReport()">Report</button>
         <button type="button" class="btn btn-history" (click)="viewHistory()">History</button>
-        <button type="button" class="btn btn-close-store" >Close Store</button>
+        <button type="button" class="btn btn-close-store" data-toggle="modal" data-target="#storeClosingModal">Close Store</button>
         <button type="button" class="btn btn-close" data-bs-dismiss="modal" (click)="closeModal('storestatusModal')">Close</button>
       </div>
     </div>
   </div>
 </div>
+<!-- Store Closing Modal -->
+<div class="modal fade" id="storeClosingModal" tabindex="-1" role="dialog" aria-labelledby="storeClosingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="storeClosingModalLabel">Close Store</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Token</th>
+                <th scope="col">Order Type</th>
+                <th scope="col">Server</th>
+                <th scope="col">Total</th>
+                <th scope="col">Due</th>
+                <th scope="col">Settle</th>
+                <th scope="col">Close</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of tickets">
+                <td>{{ ticket.token }}</td>
+                <td>{{ ticket.orderType }}</td>
+                <td>{{ ticket.server }}</td>
+                <td>{{ ticket.total | currency }}</td>
+                <td>{{ ticket.due | currency }}</td>
+                <td><button type="button" class="btn btn-primary btn-sm" (click)="settle(ticket.token)">Settle</button></td>
+                <td><button type="button" class="btn btn-danger btn-sm" (click)="close(ticket.token)">Close</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="settleAll()" data-toggle="modal" data-target="#settleAllModal">Settle All</button>
+        <button type="button" class="btn btn-warning" (click)="continueClosing()" data-toggle="modal" data-target="#alertModal">Continue Closing Store</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelClosing()">Cancel Closing Store</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alert Modal -->
+
+
 
 <!-- Assign button Modal -->
 <div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="assignModalLabel" aria-hidden="true">
@@ -735,14 +783,66 @@
         <div class="btn-group" style="margin-left: 180px;">
           <button type="button" class="btn btn-print">Print</button>
           <button type="button" class="btn btn-details">Details</button>
-          <button type="button" class="btn btn-transfer-user">Transfer User</button>
-          <button type="button" class="btn btn-close-drawer">Close Drawer</button>
+          <button type="button" class="btn btn-transfer-user" data-toggle="modal" data-target="#transferUserModal">Transfer User</button>
+          <button type="button" class="btn btn-close-drawer" data-toggle="modal" data-target="#confirmCloseDrawerModal">Close Drawer</button>
           <button type="button" class="btn btn-done" (click)="closeModal('assignModal')">Done</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Confirmation Modal for Close Drawer -->
+<div class="modal fade" id="confirmCloseDrawerModal" tabindex="-1" role="dialog" aria-labelledby="confirmCloseDrawer" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmCloseDrawer">Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to close the drawer?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="confirmCloseDrawer()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Transfer User Modal -->
+<div class="modal fade" id="transferUserModal" tabindex="-1" role="dialog" aria-labelledby="transferUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="transferUserModalLabel">Transfer User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users" (click)="selectUser(user)" [class.selected]="user.id === selectedUserId">
+              <td><button style="color:#333">{{ user.username }}</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ok" (click)="confirmTransferUser()">OK</button>
+        <button type="button" class="btn btn-cancel" (click)="closeModal('transferUserModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 <!-- Drawer Bleed Amount Modal -->
 <div class="modal fade" id="drawerBleedModal" tabindex="-1" role="dialog" aria-labelledby="drawerBleedModalLabel" aria-hidden="true">
@@ -898,8 +998,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
-        <button type="button"  style="background-color: #b0acac; color:#333;">OK</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('payoutModal')">Cancel</button>
+        <button type="button"  style="background-color: #b0acac; color:#333;" (click)="closeModal('payoutModal')">OK</button>
       </div>
     </div>
   </div>
