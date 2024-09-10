@@ -22,6 +22,7 @@ import { RouterOutlet, Router, NavigationCancel, NavigationEnd, RouterLink } fro
         }
     ]
 })
+
 export class AppComponent {
 
     title = 'Trinta -  Angular 17 Material Design Admin Dashboard Template';
